@@ -14,13 +14,21 @@ const i18n = createI18n({
     fallbackLocale: 'en',
     messages: {
         en: {
-            message: {
+            recette: {
+                recipes: 'Recipes',
                 recipeManagement: 'Recipe Management',
                 welcomeText: 'Welcome to the Recipe Management System',
                 listTitle: 'List of Recipes',
                 actions: 'Actions',
+
                 addRecipe: 'Add a Recipe',
-                edit: 'Edit',
+                recipeTitlePlaceholder: 'Enter the recipe title',
+                recipeIngredientsPlaceholder: 'Enter the recipe ingredients',
+                starter: 'Starter',
+                mainCourse: 'Main Course',
+                dessert: 'Dessert',
+
+                editRecipe: 'Edit Recipe',
                 delete: 'Delete',
                 viewDetails: 'View Details',
                 recipeTitle: 'Title',
@@ -32,13 +40,21 @@ const i18n = createI18n({
             }
         },
         fr: {
-            message: {
+            recette: {
+                recipes: 'Recettes',
                 recipeManagement: 'Gestion des recettes',
                 welcomeText: 'Bienvenue dans le système de gestion des recettes',
                 listTitle: 'Liste des Recettes',
                 actions: 'Actions',
+
                 addRecipe: 'Ajouter une Recette',
-                edit: 'Modifier',
+                recipeTitlePlaceholder: 'Entrer le titre de la recette',
+                recipeIngredientsPlaceholder: 'Entrer les ingrédients de la recette',
+                starter: 'Entrée',
+                mainCourse: 'Plat',
+                dessert: 'Dessert',
+
+                editRecipe: 'Modifier la Recette',
                 delete: 'Supprimer',
                 viewDetails: 'Voir les Détails',
                 recipeTitle: 'Titre',

@@ -1,12 +1,12 @@
 <template>
   <div class="container mt-5">
-    <h2 class="text-center mb-4">{{ $t('message.listTitle') }}</h2>
+    <h2 class="text-center mb-4">{{ $t('recette.listTitle') }}</h2>
     <table class="table table-hover">
       <thead class="table-success">
         <tr>
-          <th>{{ $t('message.recipeTitle') }}</th>
-          <th>{{ $t('message.recipeType') }}</th>
-          <th class="text-center">{{ $t('message.actions') }}</th>
+          <th>{{ $t('recette.recipeTitle') }}</th>
+          <th>{{ $t('recette.recipeType') }}</th>
+          <th class="text-center">{{ $t('recette.actions') }}</th>
         </tr>
       </thead>
       <tbody>
@@ -42,7 +42,7 @@
     </table>
 
     <RouterLink class="btn btn-primary mt-4" to="/ajouter">
-      {{ $t('message.addRecipe') }}
+      {{ $t('recette.addRecipe') }}
     </RouterLink>
 
     <div
@@ -56,7 +56,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="voirRecetteModalTitle">
-              {{ $t('message.recipeDetails') }}
+              {{ $t('recette.recipeDetails') }}
             </h5>
             <button
               type="button"
@@ -67,9 +67,9 @@
           </div>
           <div class="modal-body">
             <p><strong>Id:</strong> {{ store.recette.id }}</p>
-            <p><strong>{{ $t('message.recipeTitle') }}:</strong> {{ store.recette.titre }}</p>
-            <p><strong>{{ $t('message.ingredients') }}:</strong> {{ store.recette.ingredient }}</p>
-            <p><strong>{{ $t('message.recipeType') }}:</strong> {{ store.recette.type }}</p>
+            <p><strong>{{ $t('recette.recipeTitle') }}:</strong> {{ store.recette.titre }}</p>
+            <p><strong>{{ $t('recette.ingredients') }}:</strong> {{ store.recette.ingredient }}</p>
+            <p><strong>{{ $t('recette.recipeType') }}:</strong> {{ store.recette.type }}</p>
           </div>
         </div>
       </div>

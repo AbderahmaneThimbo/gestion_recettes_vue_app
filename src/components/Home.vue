@@ -1,7 +1,7 @@
 <template>
   <div class="text-center mt-4">
-    <h1 class="fw-bold">{{ $t('message.recipeManagement') }}</h1>
-    <p class="lead">{{ $t('message.welcomeText') }}</p>
+    <h1 class="fw-bold">{{ $t('recette.recipeManagement') }}</h1>
+    <p class="lead">{{ $t('recette.welcomeText') }}</p>
   </div>
   <div class="text-center ">
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
