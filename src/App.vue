@@ -1,5 +1,12 @@
 <script setup>
+import { ref } from "vue";
 import { RouterLink, RouterView } from "vue-router";
+
+const menuActif = ref('home')
+
+const changeMenu = (val) => {
+  menuActif.value = val
+}
 </script>
 
 <template>
@@ -24,7 +31,10 @@ import { RouterLink, RouterView } from "vue-router";
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item me-3">
-              <RouterLink class="nav-link fw-bold" to="/Liste">Recettes</RouterLink>
+              <RouterLink class="nav-link fw-bold" to="/Liste" :class="{'active': menuActif === 'recette' }" @click="changeMenu('recette')">Recettes</RouterLink>
+            </li>
+            <li class="nav-item me-3">
+              <RouterLink class="nav-link fw-bold" :class="{'active': menuActif === 'categories'}" @click="changeMenu('categories')" :to="{name: 'categories'}">Catégories</RouterLink>
             </li>
           </ul>
         </div>
@@ -39,5 +49,9 @@ import { RouterLink, RouterView } from "vue-router";
 <style scoped>
 img {
   width: 70px;
+}
+
+.nav-link.active{
+  color: red;
 }
 </style>
