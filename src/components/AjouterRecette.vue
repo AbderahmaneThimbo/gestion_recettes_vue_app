@@ -37,13 +37,25 @@
           v-model="nouvelleRecette.type"
           required
         >
-          <option value="Entrée" selected>{{ $t("recette.starter") }}</option>
+          <option value="" selected>{{ $t("recette.selectType") }}</option>
+          <option value="Entrée">{{ $t("recette.starter") }}</option>
           <option value="Plat">{{ $t("recette.mainCourse") }}</option>
           <option value="Dessert">{{ $t("recette.dessert") }}</option>
         </select>
+      </div>
+      <div class="mb-3">
+        <label for="type" class="form-label">{{
+          $t("recette.recipeCategory")
+        }}</label>
 
-        <select v-model="nouvelleRecette.categorie" class="form-control" required>
-          <option value="" selected>{{ $t("recette.selectCategory") }}</option>
+        <select
+          v-model="nouvelleRecette.categorie"
+          class="form-control"
+          required
+        >
+          <option value="" selected>
+            {{ $t("recette.selectCategory") }}
+          </option>
           <option
             v-for="(categorie, index) in store.categories"
             :key="index"
@@ -53,7 +65,7 @@
           </option>
         </select>
       </div>
-      <button type="submit" class="btn btn-primary w-25">
+      <button type="submit" class="btn mb-4 btn-primary w-25">
         {{ $t("recette.save") }}
       </button>
     </form>
@@ -74,7 +86,7 @@ const nouvelleRecette = ref({
   titre: "",
   ingredient: "",
   type: "",
-  categorie
+  categorie: "",
 });
 
 const ajouterRecette = () => {

@@ -15,15 +15,18 @@ const imgCategories = reactive([
 <template>
   <div class="container-fluid d-flex justify-content-center">
     <div class="container">
-      <router-link class="btn btn-primary" :to="{name:'add-categorie'}">{{ $t('listCategory.added') }}</router-link>
+      <div class="container mt-3 d-flex justify-content-end">
+
+        <router-link class="btn btn-primary mt-3 mb-3" :to="{name:'add-categorie'}">{{ $t('listCategory.added') }}</router-link>
+      </div>
       <div class="row justify-content-center">
         <div
-          class="col-12 col-sm-6 col-md-4 col-lg-3"
+          class="col-12 col-sm-6 mb-4 col-md-4 col-lg-3"
           v-for="(categorie, index) in stores.categories"
           :key="index"
           v-if="stores.categories.length > 0"
         >
-          <div class="card m-3 p-1" style="width: 100%">
+          <div class="card  p-1" style="width: 100%">
             <router-link
               :to="{ name: 'list-recettes-categorie', params: { id: index } }"
             >
