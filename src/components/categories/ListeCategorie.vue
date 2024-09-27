@@ -1,61 +1,82 @@
+
 <script setup>
 import { useRecetteStore } from "@/stores/recette";
-import { reactive } from "vue";
+import { onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 
-const t = useI18n();
-const stores = useRecetteStore()
-const imgCategories = reactive([
-  { image: "/src/assets/img1.jpg", nom: "Cathégorie 1" },
-  { image: "/src/assets/img2.jpg", nom: "Cathégorie 2" },
-  { image: "/src/assets/img3.jpg", nom: "Cathégorie 3" },
-]);
+const { t } = useI18n();
+
+const stores = useRecetteStore();
+
+onMounted(() => {
+  stores.loandCategorieData();
+  stores.loandRecetteData();
+});
 </script>
+
 
 <template>
   <div class="container-fluid d-flex justify-content-center">
     <div class="container">
       <div class="container mt-3 d-flex justify-content-end">
-
-        <router-link class="btn btn-primary mt-3 mb-3" :to="{name:'add-categorie'}">{{ $t('listCategory.added') }}</router-link>
+        <router-link
+          class="btn btn-primary mt-3 mb-3"
+          :to="{ name: 'add-categorie' }"
+        >
+          {{ t("listCategory.added") }}
+        </router-link>
       </div>
+
       <div class="row justify-content-center">
         <div
+          v-if="stores.categories.length > 0"
           class="col-12 col-sm-6 mb-4 col-md-4 col-lg-3"
           v-for="(categorie, index) in stores.categories"
           :key="index"
-          v-if="stores.categories.length > 0"
         >
-          <div class="card  p-1" style="width: 100%">
+          <div class="card p-1" style="width: 100%">
             <router-link
-              :to="{ name: 'list-recettes-categorie', params: { id: index } }"
+              :to="{
+                name: 'list-recettes-categorie',
+                params: { id: categorie.id },
+              }"
             >
-              <img :src="categorie.image" class="card-img-top" alt="..." />
+              <img
+                src="https://via.placeholder.com/150"
+                class="card-img-top"
+                alt="Categorie image"
+              />
               <h5 class="card-title text-center fw-bold mt-4 mb-4">
-                {{ categorie }}
+                {{ categorie.nom }}
               </h5>
             </router-link>
+
             <div
-              class="card-body d-flex justify-content-between  align-items-center"
+              class="card-body d-flex justify-content-between align-items-center"
             >
-              <router-link 
+              <router-link
                 class="btn btn-sm btn-warning float-end"
-                :to="{ name: 'edit-categorie', params: { id: index } }"
+                :to="{ name: 'edit-categorie', params: { id: categorie.id } }"
               >
                 <i class="fas fa-edit"></i>
               </router-link>
-              <button class="btn btn-sm btn-danger float-end " @click="stores.removeCategorie(index)">
+
+              <button
+                class="btn btn-sm btn-danger float-end"
+                @click="stores.removeCategorie(categorie.id)"
+              >
                 <i class="fas fa-trash"></i>
               </button>
             </div>
           </div>
         </div>
-        <div class="container" v-else>
-         <h1 class="fw-bold text-center mt-5 text-danger" >{{ $t('listCategory.data') }}</h1>
+
+        <div v-else class="container">
+          <h1 class="fw-bold text-center mt-5 text-danger">
+            {{ t("listCategory.data") }}
+          </h1>
         </div>
       </div>
     </div>
   </div>
 </template>
-
-<style scoped></style>

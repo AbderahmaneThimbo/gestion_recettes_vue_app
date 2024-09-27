@@ -8,6 +8,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 import App from "./App.vue";
 import router from "./router";
+import axios from "axios";
 
 const i18n = createI18n({
   locale: "fr",
@@ -121,5 +122,6 @@ const app = createApp(App);
 
 app.use(createPinia());
 app.use(router);
+app.use(axios);
 app.use(i18n);
 app.mount("#app");

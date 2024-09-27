@@ -32,23 +32,23 @@ const router = createRouter({
     {
       path: "/categories",
       component: ListeCategorie,
-      name: "categories"
+      name: "categories",
     },
     {
       path: "/categories/add",
       component: AjouterCateorie,
-      name: "add-categorie"
+      name: "add-categorie",
     },
     {
-      path: "/categories:id",
+      path: "/categories/:id",
       component: ModifierCategorie,
-      name: "edit-categorie"
+      name: "edit-categorie",
     },
     {
-      path: "/categories:id/recettes",
+      path: "/categories/:id/recettes",
       component: ListeRecetteCategorie,
-      name: "list-recettes-categorie"
-    }
+      name: "list-recettes-categorie",
+    },
   ],
 });
 
