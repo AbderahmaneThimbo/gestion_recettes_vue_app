@@ -1,18 +1,15 @@
 <template>
-  <div class="container mt-5">
-    <h2 class="text-center mb-2 fw-bold">{{ $t('recette.listTitle') }}</h2>
-      <div class="container d-flex justify-content-end">
+  <div class="container">
+    <h3 class="text-center w-100 mt-4 mb-3">
+      {{ $t("recipeListCategory.title") }} 
+    </h3>
 
-        <RouterLink class="btn btn-primary mt-3 mb-3" to="/ajouter">
-          {{ $t('recette.addRecipe') }}
-        </RouterLink>
-      </div>
     <table class="table table-hover">
       <thead class="table-success">
         <tr>
-          <th>{{ $t('recette.recipeTitle') }}</th>
-          <th>{{ $t('recette.recipeType') }}</th>
-          <th class="text-center">{{ $t('recette.actions') }}</th>
+          <th>{{ $t("recette.recipeTitle") }}</th>
+          <th>{{ $t("recette.recipeType") }}</th>
+          <th class="text-center">{{ $t("recette.actions") }}</th>
         </tr>
       </thead>
       <tbody>
@@ -26,28 +23,26 @@
               data-bs-toggle="modal"
               data-bs-target="#voirRecetteModal"
             >
-              <i class="fas fa-eye"></i> 
+              <i class="fas fa-eye"></i>
             </button>
             <button
               class="btn btn-warning btn-sm me-2"
               @click="store.getRecette(recette)"
             >
               <RouterLink to="/modifier">
-                <i class="fas fa-edit"></i> 
+                <i class="fas fa-edit"></i>
               </RouterLink>
             </button>
             <button
               class="btn btn-danger btn-sm"
               @click="store.removeRecette(index)"
             >
-              <i class="fas fa-trash"></i> 
+              <i class="fas fa-trash"></i>
             </button>
           </td>
         </tr>
       </tbody>
     </table>
-
-    
 
     <div
       class="modal fade"
@@ -60,7 +55,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="voirRecetteModalTitle">
-              {{ $t('recette.recipeDetails') }}
+              {{ $t("recette.recipeDetails") }}
             </h5>
             <button
               type="button"
@@ -71,10 +66,18 @@
           </div>
           <div class="modal-body">
             <p><strong>Id:</strong> {{ store.recette.id }}</p>
-            <p><strong>{{ $t('recette.recipeTitle') }}:</strong> {{ store.recette.titre }}</p>
-            <p><strong>{{ $t('recette.ingredients') }}:</strong> {{ store.recette.ingredient }}</p>
-            <p><strong>{{ $t('recette.recipeType') }}:</strong> {{ store.recette.type }}</p>
-            <p><strong>{{ $t('recette.recipeCategory') }}:</strong> {{ store.recette.categorie }}</p>
+            <p>
+              <strong>{{ $t("recette.recipeTitle") }}:</strong>
+              {{ store.recette.titre }}
+            </p>
+            <p>
+              <strong>{{ $t("recette.ingredients") }}:</strong>
+              {{ store.recette.ingredient }}
+            </p>
+            <p>
+              <strong>{{ $t("recette.recipeType") }}:</strong>
+              {{ store.recette.type }}
+            </p>
           </div>
         </div>
       </div>
@@ -83,11 +86,13 @@
 </template>
 
 <script setup>
-import { useRecetteStore } from "@/stores/recette";
-import { useI18n } from "vue-i18n";
-import { RouterLink } from "vue-router";
+import { useRecetteStore } from "@/stores/recette.js";
+import { ref } from "vue";
 
-const { t } = useI18n();
-const store = useRecetteStore();
-const recettes = store.recettes;
+
+const store = useRecetteStore()
+const editRecipe = (recipe) => {
+  // Rediriger vers le formulaire de modification
+  console.log("Editer la recette", recipe);
+};
 </script>

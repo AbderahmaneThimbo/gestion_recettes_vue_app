@@ -30,6 +30,10 @@
           <option value="Plat">{{ $t('recette.mainCourse') }}</option> 
           <option value="Dessert">{{ $t('recette.dessert') }}</option> 
         </select>
+        <select  v-model="store.recette.categorie" class="form-control" required>
+          <option value="" selected >{{ $t('recette.selectCategory') }}</option> 
+          <option v-for="(categorie, index) in store.categories" :key="index" :value="categorie">{{categorie  }}</option> 
+        </select>
       </div>
       <RouterLink type="submit" class="btn btn-primary w-25" to="/liste">{{ $t('recette.save') }}</RouterLink> 
     </form>
