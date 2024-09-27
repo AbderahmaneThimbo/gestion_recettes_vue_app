@@ -1,24 +1,21 @@
+
 <template>
   <div class="container">
     <h3 class="text-center fw-bold">{{ $t("editCategory.title") }}</h3>
-    <form @submit.prevent="updateRecipe">
+    <form @submit.prevent="updateCategory">
       <div class="mb-3">
-        <label for="recipeName" class="form-label">{{
-          $t("editCategory.name")
-        }}</label>
+        <label for="categoryName" class="form-label">
+          {{ $t("editCategory.name") }}
+        </label>
         <input
-          v-model="stores.categorie"
+          v-model="stores.categorie.nom"
           type="text"
-          id="recipeName"
+          id="categoryName"
           class="form-control"
           required
         />
       </div>
-      <button
-        type="submit"
-        class="btn btn-primary"
-        @click="stores.editCategorie(router.params.id)"
-      >
+      <button type="submit" class="btn btn-primary">
         {{ $t("editCategory.save") }}
       </button>
     </form>
@@ -27,9 +24,33 @@
 
 <script setup>
 import { useRecetteStore } from "@/stores/recette";
-import { ref } from "vue";
-import { useRoute } from "vue-router";
-useRoute;
+import { onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
+
 const stores = useRecetteStore();
-const router = useRoute();
+
+const route = useRoute();
+const router = useRouter();
+
+const loadCategory = () => {
+  const id = route.params.id;
+  const category = stores.categories.find((cat) => cat.id === parseInt(id));
+  if (category) {
+    stores.categorie = { ...category };
+  } else {
+    console.error("Category not found");
+  }
+};
+
+const updateCategory = () => {
+  const id = route.params.id;
+  stores.editCategorie(id);
+  router.push("/categories");
+};
+
+onMounted(() => {
+  stores.loandCategorieData().then(() => {
+    loadCategory();
+  });
+});
 </script>

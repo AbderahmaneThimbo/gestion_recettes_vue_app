@@ -1,93 +1,233 @@
+import axios from "axios";
 import { defineStore } from "pinia";
-import { ref } from "vue";
+
 import { useRouter } from "vue-router";
 
-export const useRecetteStore = defineStore("recette", () => {
-  const route = useRouter();
+// export const useRecetteStore = defineStore("recette", () => {
+//   const route = useRouter();
+//   const recette = ref({
+//     titre: "",
+//     ingredient: "",
+//     type: "",
+//     categorie: "",
+//   });
+//   const categorie = ref({ nom: "" });
 
-  const recette = ref({
-    id: 0,
-    titre: "",
-    ingredient: "",
-    type: "",
-    categorie: "",
-  });
-  const categorie = ref("");
+//   const categories = ref([]);
+//   const recettes = ref([]);
 
-  const categories = ref([
-    "Categorie A",
-    "Categorie B",
-    "Categorie C",
-    "Categorie D",
-  ]);
-  const recettes = ref([
-    {
-      id: 1,
-      titre: "Salade de fruits",
-      ingredient: "Fruits divers, jus de citron, miel",
-      type: "Entrée",
-      categorie: "Catégorie A",
+//   const loandRecetteData = () => {
+//     axios
+//       .get("http://127.0.0.1:3000/recettes")
+//       .then((reponse) => {
+//         recettes.value = reponse.data;
+//       })
+//       .catch((err) => (recette.value = []));
+//   };
+
+//   const removeRecette = (index) => {
+//     axios
+//       .delete(`http://127.0.0.1:3000/recettes/${index}`)
+//       .then((reponse) => {
+//         loandRecetteData();
+//         return reponse;
+//       })
+//       .catch((err) => {});
+//   };
+
+//   const addRecette = (recette) => {
+//     axios
+//       .post("http://127.0.0.1:3000/recettes", recette)
+//       .then((response) => {
+//         console.log(response.data);
+//         loandRecetteData();
+//       })
+//       .catch((err) => console.log(err));
+//     route.push("/Liste");
+//   };
+
+//   const editRecette = (obj) => {
+//     axios
+//       .post("http://127.0.0.1:3000/recettes", recette)
+//       .then((response) => {
+//         console.log(response.data);
+//         loandRecetteData();
+//         route.push("/Liste");
+//       })
+//       .catch((err) => console.log(err));
+//     route.push("/recette");
+//   };
+
+//   // :::::::::::::::::::::SECTION CATEGORIE::::::::::::::::
+//   const loandCategorieData = () => {
+//     axios
+//       .get("http://127.0.0.1:3000/categories")
+//       .then((reponse) => {
+//         categories.value = reponse.data;
+//       })
+//       .catch((err) => (categories.value = []));
+//   };
+
+//   const getCategorie = (categorie) => {
+//     categories.value = categorie;
+//   };
+
+//   const removeCategorie = (index) => {
+//     axios
+//       .delete(`http://127.0.0.1:3000/categories/${index}`)
+//       .then((reponse) => {
+//         loandCategorieData();
+//         return reponse;
+//       })
+//       .catch((error) => {});
+//   };
+
+//   const addCategorie = (obj) => {
+//     axios
+//       .post(`http://127.0.0.1:3000/categories`, obj)
+//       .then((reponse) => {
+//         loandCategorieData();
+//         return reponse;
+//       })
+//       .catch((error) => {
+//         console.log(error);
+//       });
+//   };
+
+//   const editCategorie = (index) => {
+//     categories.value[index] = categorie.value;
+//     route.push("/categories");
+//   };
+
+//   return {
+//     recettes,
+//     recette,
+//     categorie,
+//     categories,
+//     loandRecetteData,
+//     loandCategorieData,
+//     getRecette,
+//     removeRecette,
+//     addRecette,
+//     editRecette,
+//     getCategorie,
+//     removeCategorie,
+//     addCategorie,
+//     editCategorie,
+//   };
+// });
+
+export const useRecetteStore = defineStore("recette", {
+  state: () => ({
+    route: useRouter(),
+    recette: {
+      titre: "",
+      ingredient: "",
+      type: "",
+      categorie: "",
     },
-    {
-      id: 2,
-      titre: "Lasagne",
-      ingredient: "Pâtes à lasagne, sauce tomate, viande hachée, fromage",
-      type: "Plat",
-      categorie: "Catégorie B",
+    categorie: {
+      nom: "",
     },
-  ]);
+    categories: [],
+    recettes: [],
+  }),
 
-  const getRecette = (index) => {
-    recette.value = index;
-  };
+  actions: {
+    loandRecetteData() {
+      axios
+        .get("http://127.0.0.1:3000/recettes")
+        .then((reponse) => {
+          this.recettes = reponse.data;
+        })
+        .catch((err) => {
+          this.recettes = [];
+          console.log(err);
+        });
+    },
 
-  const removeRecette = (index) => {
-    recettes.value.splice(index, 1);
-  };
+    removeRecette(index) {
+      axios
+        .delete(`http://127.0.0.1:3000/recettes/${index}`)
+        .then((reponse) => {
+          this.loandRecetteData();
+          return reponse;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
 
-  const addRecette = (obj) => {
-    recettes.value.push(obj);
-    route.push("/recette");
-  };
+    addRecette(recette) {
+      axios
+        .post("http://127.0.0.1:3000/recettes", recette)
+        .then((response) => {
+          console.log(response.data);
+          this.loandRecetteData();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      this.route.push("/Liste");
+    },
 
-  const editRecette = (obj) => {
-    const index = obj.id - 1;
-    recettes.value[index].titre = obj.titre;
-    recettes.value[index].ingredient = obj.ingredient;
-    recettes.value[index].type = obj.type;
-    route.push("/recette");
-  };
+    editRecette(recette) {
+      axios
+        .post("http://127.0.0.1:3000/recettes", recette)
+        .then((response) => {
+          console.log(response.data);
+          this.loandRecetteData();
+          this.route.push("/Liste");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
 
-  const getCategorie = (categorie) => {
-  categories.value = categorie;
-  };
+    // :::::::::::::::::::::SECTION CATEGORIE::::::::::::::::
+    loandCategorieData() {
+      axios
+        .get("http://127.0.0.1:3000/categories")
+        .then((reponse) => {
+          this.categories = reponse.data;
+        })
+        .catch((err) => {
+          this.categories = [];
+          console.log(err);
+        });
+    },
 
-  const removeCategorie = (index) => {
-    categories.value.splice(index, 1);
-  };
+    getCategorie(categorie) {
+      this.categories = categorie;
+    },
 
-  const addCategorie = (obj) => {
-    categories.value.push(obj);
-    route.push("/categories");
-  };
+    removeCategorie(index) {
+      axios
+        .delete(`http://127.0.0.1:3000/categories/${index}`)
+        .then((reponse) => {
+          this.loandCategorieData();
+          return reponse;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
 
-  const editCategorie = (index) => {
-    categories.value[index] = categorie.value
-    route.push("/categories");
-  };
+    addCategorie(obj) {
+      axios
+        .post(`http://127.0.0.1:3000/categories`, obj)
+        .then((reponse) => {
+          this.loandCategorieData();
+          return reponse;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
 
-  return {
-    recettes,
-    recette,
-    categorie,
-    categories,
-    getRecette,
-    removeRecette,
-    addRecette,
-    editRecette,
-    getCategorie,
-    removeCategorie,
-    addCategorie,
-    editCategorie
-  };
+    editCategorie(index) {
+      this.categories[index] = this.categorie;
+      this.route.push("/categories");
+    },
+  },
 });
