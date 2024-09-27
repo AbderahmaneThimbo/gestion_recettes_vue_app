@@ -14,11 +14,15 @@ const i18n = createI18n({
     fallbackLocale: 'en',
     messages: {
         en: {
+            
             recette: {
                 recipes: 'Recipes',
+                category: 'Category',
                 recipeManagement: 'Recipe Management',
+                selectCategory: "Select Category",
                 welcomeText: 'Welcome to the Recipe Management System',
                 listTitle: 'List of Recipes',
+                recipeCategory: "Category",
                 actions: 'Actions',
 
                 addRecipe: 'Add a Recipe',
@@ -37,12 +41,39 @@ const i18n = createI18n({
                 addNewRecipe: 'Add a New Recipe',
                 save: 'Save',
                 recipeDetails: 'Recipe Details',
+            },
+
+            listCategory:{
+                showCategoryRecepes: 'Recepes List',
+                modify: "modify",
+                added: "New Category",
+                data: "No Registered Category"
+            },
+
+            recipeListCategory:{
+                title: " Recipes List of  "
+            },
+            editCategory:{
+                title: "Edit Category",
+                name: "Name",
+                save:"Save",
+            },
+            addCategorie:{
+                title: "New Category",
+                name: "Name",
+                submit: "Submit"
             }
+
+
+
         },
         fr: {
             recette: {
                 recipes: 'Recettes',
+                category: 'Catégories',
                 recipeManagement: 'Gestion des recettes',
+                recipeCategory: "Catégorie",
+                selectCategory: "Chosir Catégorie",
                 welcomeText: 'Bienvenue dans le système de gestion des recettes',
                 listTitle: 'Liste des Recettes',
                 actions: 'Actions',
@@ -63,6 +94,28 @@ const i18n = createI18n({
                 addNewRecipe: 'Ajouter une nouvelle Recette',
                 save: 'Enregistrer',
                 recipeDetails: 'Détails de la Recette',
+            },
+            listCategory:{
+                showCategoryRecepes: 'Liste de Recettes',
+                modify: "Modifier",
+                added: "Nouveau Catégorie",
+                data: "Aucun Catégorie Enregistée"
+
+
+            },
+
+            recipeListCategory:{
+                title: " Liste de Recettes de "
+            },
+            editCategory:{
+                title: "Modification de Catégorie",
+                name: "Nom",
+                save:"Enregister",
+            },
+            addCategorie:{
+                title: "Nouveau Catégorie",
+                name: "Nom",
+                submit: "Soumettre"
             }
         }
     }

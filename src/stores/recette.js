@@ -10,20 +10,30 @@ export const useRecetteStore = defineStore("recette", () => {
     titre: "",
     ingredient: "",
     type: "",
+    categorie: "",
   });
+  const categorie = ref("");
 
+  const categories = ref([
+    "Categorie A",
+    "Categorie B",
+    "Categorie C",
+    "Categorie D",
+  ]);
   const recettes = ref([
     {
       id: 1,
       titre: "Salade de fruits",
       ingredient: "Fruits divers, jus de citron, miel",
       type: "Entrée",
+      categorie: "Catégorie A",
     },
     {
       id: 2,
       titre: "Lasagne",
       ingredient: "Pâtes à lasagne, sauce tomate, viande hachée, fromage",
       type: "Plat",
+      categorie: "Catégorie B",
     },
   ]);
 
@@ -48,12 +58,36 @@ export const useRecetteStore = defineStore("recette", () => {
     route.push("/recette");
   };
 
+  const getCategorie = (categorie) => {
+  categories.value = categorie;
+  };
+
+  const removeCategorie = (index) => {
+    categories.value.splice(index, 1);
+  };
+
+  const addCategorie = (obj) => {
+    categories.value.push(obj);
+    route.push("/categories");
+  };
+
+  const editCategorie = (index) => {
+    categories.value[index] = categorie.value
+    route.push("/categories");
+  };
+
   return {
     recettes,
     recette,
+    categorie,
+    categories,
     getRecette,
     removeRecette,
     addRecette,
     editRecette,
+    getCategorie,
+    removeCategorie,
+    addCategorie,
+    editCategorie
   };
 });

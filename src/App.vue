@@ -34,6 +34,9 @@ const changeLanguage = (event) => {
             <li class="nav-item me-3">
               <RouterLink class="nav-link fw-bold" to="/Liste">{{ $t('recette.recipes') }}</RouterLink>
             </li>
+            <li class="nav-item me-3">
+              <RouterLink class="nav-link fw-bold" :to="{name: 'categories'}">{{ $t('recette.category') }}</RouterLink>
+            </li>
             <li class="nav-item">
               <select class="form-select" @change="changeLanguage">
                 <option value="fr">FR</option>
@@ -43,6 +46,7 @@ const changeLanguage = (event) => {
           </ul>
         </div>
       </div>
+      
     </nav>
   </header>
 
