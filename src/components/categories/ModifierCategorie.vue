@@ -49,8 +49,7 @@ const updateCategory = () => {
 };
 
 onMounted(() => {
-  stores.loandCategorieData().then(() => {
-    loadCategory();
-  });
+  stores.loandCategorieData();
+  loadCategory();
 });
 </script>

@@ -12,6 +12,13 @@ onMounted(() => {
   stores.loandCategorieData();
   stores.loandRecetteData();
 });
+
+const removeCategorie = (id) => {
+  const confirm = window.confirm(t("recette.recipeConfirm"));
+  if (confirm) {
+    stores.removeCategorie(id);
+  }
+};
 </script>
 
 
@@ -40,6 +47,10 @@ onMounted(() => {
                 name: 'list-recettes-categorie',
                 params: { id: categorie.id },
               }"
+              @click="
+                stores.nameCategory(index),
+                  stores.recetteByCategorie(categorie.id)
+              "
             >
               <img
                 src="https://via.placeholder.com/150"
@@ -63,7 +74,7 @@ onMounted(() => {
 
               <button
                 class="btn btn-sm btn-danger float-end"
-                @click="stores.removeCategorie(categorie.id)"
+                @click="removeCategorie(categorie.id)"
               >
                 <i class="fas fa-trash"></i>
               </button>
