@@ -1,6 +1,21 @@
 <template>
   <div class="container mt-5">
     <h2 class="text-center mb-2 fw-bold">{{ t("recette.listTitle") }}</h2>
+    
+    <div class="container mt-4">
+      <div class="input-group w-50">
+        <span class="input-group-text bg-primary border-primary">
+          <i class="fas fa-search"></i>
+        </span>
+        <input
+          type="text"
+          class="form-control border-primary rounded"
+          :placeholder="$t('recette.searchPlaceholder') "
+          v-model="searchQuery"
+        />
+      </div>
+    </div>
+
     <div class="container d-flex justify-content-end">
       <RouterLink
         class="btn btn-primary mt-3 mb-3"
@@ -20,7 +35,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="recette in recettes" :key="recette.id">
+        <!-- Utiliser la fonction calculée filteredRecettes -->
+        <tr v-for="recette in filteredRecettes" :key="recette.id">
           <td>{{ recette.id }}</td>
           <td>{{ recette.titre }}</td>
           <td>{{ recette.type }}</td>
@@ -98,19 +114,28 @@
 
 <script setup>
 import { useRecetteStore } from "@/stores/recette";
-import { onMounted, computed } from "vue";
+import { onMounted, computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { RouterLink } from "vue-router";
 
 const store = useRecetteStore();
+const searchQuery = ref("");
 
 const recettes = computed(() => store.recettes);
 const { t } = useI18n();
+
+
+const filteredRecettes = computed(() => {
+  return recettes.value.filter((recette) =>
+    recette.titre.toLowerCase().includes(searchQuery.value.toLowerCase())
+  );
+});
 
 onMounted(() => {
   store.loandRecetteData();
   store.loandCategorieData();
 });
+
 const viewRecette = (recette) => {
   store.getRecette(recette);
 };

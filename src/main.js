@@ -10,113 +10,17 @@ import App from "./App.vue";
 import router from "./router";
 import axios from "axios";
 
+
+import en from './locales/en.json';
+import fr from './locales/fr.json';
+
+
 const i18n = createI18n({
-  locale: "fr",
-  fallbackLocale: "en",
+  locale: "fr", 
+  fallbackLocale: "en", 
   messages: {
-    en: {
-      recette: {
-        recipes: "Recipes",
-        recipeConfirm: "Are you sure you want to delete this recipe?",
-        category: "Category",
-        recipeManagement: "Recipe Management",
-        welcomeText: "Welcome to the Recipe Management System",
-        listTitle: "List of Recipes",
-        recipeCategory: "Category",
-        actions: "Actions",
-
-        addRecipe: "Add a Recipe",
-        recipeTitlePlaceholder: "Enter the recipe title",
-        recipeIngredientsPlaceholder: "Enter the recipe ingredients",
-        starter: "Starter",
-        mainCourse: "Main Course",
-        dessert: "Dessert",
-        selectCategory: "Select Category",
-        selectType: "Select Type",
-
-        editRecipe: "Edit Recipe",
-        delete: "Delete",
-        viewDetails: "View Details",
-        recipeTitle: "Title",
-        recipeType: "Type",
-        ingredients: "Ingredients",
-        addNewRecipe: "Add a New Recipe",
-        save: "Save",
-        recipeDetails: "Recipe Details",
-      },
-
-      listCategory: {
-        showCategoryRecepes: "Recepes List",
-        modify: "modify",
-        added: "New Category",
-        data: "No Registered Category",
-      },
-
-      recipeListCategory: {
-        title: " Category Recipes:  ",
-      },
-      editCategory: {
-        title: "Edit Category",
-        name: "Name",
-        save: "Save",
-      },
-      addCategorie: {
-        title: "New Category",
-        name: "Name",
-        submit: "Submit",
-      },
-    },
-    fr: {
-      recette: {
-        recipes: "Recettes",
-        recipeConfirm: "Vous êtes sur de vouloir supprimer cette recette ?",
-        category: "Catégories",
-        recipeManagement: "Gestion des recettes",
-        recipeCategory: "Catégorie",
-        welcomeText: "Bienvenue dans le système de gestion des recettes",
-        listTitle: "Liste des Recettes",
-        actions: "Actions",
-
-        addRecipe: "Ajouter une Recette",
-        recipeTitlePlaceholder: "Entrer le titre de la recette",
-        recipeIngredientsPlaceholder: "Entrer les ingrédients de la recette",
-        selectType: "Choisir Type",
-        starter: "Entrée",
-        mainCourse: "Plat",
-        dessert: "Dessert",
-        selectCategory: "Choisir Catégorie",
-
-        editRecipe: "Modifier la Recette",
-        delete: "Supprimer",
-        viewDetails: "Voir les Détails",
-        recipeTitle: "Titre",
-        recipeType: "Type",
-        ingredients: "Ingrédients",
-        addNewRecipe: "Ajouter une nouvelle Recette",
-        save: "Enregistrer",
-        recipeDetails: "Détails de la Recette",
-      },
-      listCategory: {
-        showCategoryRecepes: "Liste de Recettes",
-        modify: "Modifier",
-        added: "Nouveau Catégorie",
-        data: "Aucun Catégorie Enregistée",
-      },
-
-      recipeListCategory: {
-        title: "  Recettes de Catégorie: ",
-      },
-      editCategory: {
-        title: "Modification de Catégorie",
-        name: "Nom",
-        save: "Enregister",
-      },
-      addCategorie: {
-        title: "Nouveau Catégorie",
-        name: "Nom",
-        submit: "Soumettre",
-      },
-    },
+    en, 
+    fr, 
   },
 });
 
