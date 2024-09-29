@@ -1,233 +1,163 @@
 import axios from "axios";
 import { defineStore } from "pinia";
-
 import { useRouter } from "vue-router";
-
-// export const useRecetteStore = defineStore("recette", () => {
-//   const route = useRouter();
-//   const recette = ref({
-//     titre: "",
-//     ingredient: "",
-//     type: "",
-//     categorie: "",
-//   });
-//   const categorie = ref({ nom: "" });
-
-//   const categories = ref([]);
-//   const recettes = ref([]);
-
-//   const loandRecetteData = () => {
-//     axios
-//       .get("http://127.0.0.1:3000/recettes")
-//       .then((reponse) => {
-//         recettes.value = reponse.data;
-//       })
-//       .catch((err) => (recette.value = []));
-//   };
-
-//   const removeRecette = (index) => {
-//     axios
-//       .delete(`http://127.0.0.1:3000/recettes/${index}`)
-//       .then((reponse) => {
-//         loandRecetteData();
-//         return reponse;
-//       })
-//       .catch((err) => {});
-//   };
-
-//   const addRecette = (recette) => {
-//     axios
-//       .post("http://127.0.0.1:3000/recettes", recette)
-//       .then((response) => {
-//         console.log(response.data);
-//         loandRecetteData();
-//       })
-//       .catch((err) => console.log(err));
-//     route.push("/Liste");
-//   };
-
-//   const editRecette = (obj) => {
-//     axios
-//       .post("http://127.0.0.1:3000/recettes", recette)
-//       .then((response) => {
-//         console.log(response.data);
-//         loandRecetteData();
-//         route.push("/Liste");
-//       })
-//       .catch((err) => console.log(err));
-//     route.push("/recette");
-//   };
-
-//   // :::::::::::::::::::::SECTION CATEGORIE::::::::::::::::
-//   const loandCategorieData = () => {
-//     axios
-//       .get("http://127.0.0.1:3000/categories")
-//       .then((reponse) => {
-//         categories.value = reponse.data;
-//       })
-//       .catch((err) => (categories.value = []));
-//   };
-
-//   const getCategorie = (categorie) => {
-//     categories.value = categorie;
-//   };
-
-//   const removeCategorie = (index) => {
-//     axios
-//       .delete(`http://127.0.0.1:3000/categories/${index}`)
-//       .then((reponse) => {
-//         loandCategorieData();
-//         return reponse;
-//       })
-//       .catch((error) => {});
-//   };
-
-//   const addCategorie = (obj) => {
-//     axios
-//       .post(`http://127.0.0.1:3000/categories`, obj)
-//       .then((reponse) => {
-//         loandCategorieData();
-//         return reponse;
-//       })
-//       .catch((error) => {
-//         console.log(error);
-//       });
-//   };
-
-//   const editCategorie = (index) => {
-//     categories.value[index] = categorie.value;
-//     route.push("/categories");
-//   };
-
-//   return {
-//     recettes,
-//     recette,
-//     categorie,
-//     categories,
-//     loandRecetteData,
-//     loandCategorieData,
-//     getRecette,
-//     removeRecette,
-//     addRecette,
-//     editRecette,
-//     getCategorie,
-//     removeCategorie,
-//     addCategorie,
-//     editCategorie,
-//   };
-// });
 
 export const useRecetteStore = defineStore("recette", {
   state: () => ({
     route: useRouter(),
+
     recette: {
       titre: "",
-      ingredient: "",
+      ingredients: "",
       type: "",
-      categorie: "",
+      categorie_id: "",
     },
-    categorie: {
-      nom: "",
-    },
+    categorie: "",
+    recetteId: "",
+    categorieName: "",
+
     categories: [],
     recettes: [],
+    recettesCategorie: [],
   }),
 
   actions: {
-    loandRecetteData() {
-      axios
-        .get("http://127.0.0.1:3000/recettes")
-        .then((reponse) => {
-          this.recettes = reponse.data;
-        })
-        .catch((err) => {
-          this.recettes = [];
-          console.log(err);
-        });
+    async loandRecetteData() {
+      try {
+        const reponse = await axios.get("http://127.0.0.1:3000/recettes");
+        this.recettes = reponse.data;
+      } catch (err) {
+        console.error("Erreur lors du chargement des recettes :", err.message);
+        this.recettes = [];
+      }
     },
 
-    removeRecette(index) {
-      axios
-        .delete(`http://127.0.0.1:3000/recettes/${index}`)
-        .then((reponse) => {
-          this.loandRecetteData();
-          return reponse;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    async iniatilise() {
+      this.recette.titre = "";
+      this.recette.ingredients = "";
+      this.recette.type = "";
+      this.recette.categorie_id = "";
+    },
+    getRecette(recette) {
+      if (recette) {
+        this.recette = recette;
+        this.categorie = this.categories.filter(
+          (cat) => cat.id === recette.categorie_id
+        );
+        this.recetteId = recette.id;
+      } else {
+        this.recette = {
+          id: null,
+          titre: "",
+          ingredient: "",
+          type: "",
+          categorie_id: null,
+        };
+      }
+    },
+    async removeRecette(index) {
+      try {
+        const reponse = await axios.delete(
+          `http://127.0.0.1:3000/recettes/${index}`
+        );
+        this.loandRecetteData();
+        return reponse;
+      } catch (err) {
+        console.error(
+          "Erreur lors de la suppression de la recette :",
+          err.message
+        );
+      }
+    },
+    async addRecette(recette) {
+      try {
+        await axios.post("http://127.0.0.1:3000/recettes", recette);
+        this.loandRecetteData();
+      } catch (err) {
+        console.error("Erreur lors de l'ajout de la recette :", err.message);
+      }
     },
 
-    addRecette(recette) {
-      axios
-        .post("http://127.0.0.1:3000/recettes", recette)
-        .then((response) => {
-          console.log(response.data);
-          this.loandRecetteData();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      this.route.push("/Liste");
+    async editRecette() {
+      try {
+        const response = await axios.put(
+          `http://127.0.0.1:3000/recettes/${this.recetteId}`,
+          this.recette
+        );
+        console.log(response.data);
+        this.loandRecetteData();
+      } catch (err) {
+        console.error(
+          "Erreur lors de la modification de la recette :",
+          err.message
+        );
+      }
     },
-
-    editRecette(recette) {
-      axios
-        .post("http://127.0.0.1:3000/recettes", recette)
-        .then((response) => {
-          console.log(response.data);
-          this.loandRecetteData();
-          this.route.push("/Liste");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    recetteByCategorie(id) {
+      this.recettesCategorie = this.recettes.filter(
+        (recette) => recette.categorie_id === id
+      );
+    },
+    nameCategory(id) {
+      this.categorieName = this.categories[id].nom;
     },
 
     // :::::::::::::::::::::SECTION CATEGORIE::::::::::::::::
-    loandCategorieData() {
-      axios
-        .get("http://127.0.0.1:3000/categories")
-        .then((reponse) => {
-          this.categories = reponse.data;
-        })
-        .catch((err) => {
-          this.categories = [];
-          console.log(err);
-        });
+    async loandCategorieData() {
+      try {
+        const reponse = await axios.get("http://127.0.0.1:3000/categories");
+        this.categories = reponse.data;
+      } catch (err) {
+        console.error(
+          "Erreur lors du chargement des catégories :",
+          err.message
+        );
+        this.categories = [];
+      }
     },
-
     getCategorie(categorie) {
       this.categories = categorie;
     },
-
-    removeCategorie(index) {
-      axios
-        .delete(`http://127.0.0.1:3000/categories/${index}`)
-        .then((reponse) => {
-          this.loandCategorieData();
-          return reponse;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    async removeCategorie(index) {
+      try {
+        const reponse = await axios.delete(
+          `http://127.0.0.1:3000/categories/${index}`
+        );
+        this.loandCategorieData();
+        return reponse;
+      } catch (err) {
+        console.error(
+          "Erreur lors de la suppression de la catégorie :",
+          err.message
+        );
+      }
     },
-
-    addCategorie(obj) {
-      axios
-        .post(`http://127.0.0.1:3000/categories`, obj)
-        .then((reponse) => {
-          this.loandCategorieData();
-          return reponse;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    async addCategorie(obj) {
+      try {
+        const reponse = await axios.post(
+          `http://127.0.0.1:3000/categories`,
+          obj
+        );
+        this.loandCategorieData();
+        return reponse;
+      } catch (err) {
+        console.error("Erreur lors de l'ajout de la catégorie :", err.message);
+      }
     },
-
-    editCategorie(index) {
-      this.categories[index] = this.categorie;
-      this.route.push("/categories");
+    async editCategorie(index) {
+      try {
+        await axios.put(
+          `http://127.0.0.1:3000/categories/${index}`,
+          this.categorie
+        );
+        this.loandCategorieData();
+        this.route.push("/categories");
+      } catch (err) {
+        console.error(
+          "Erreur lors de la modification de la catégorie :",
+          err.message
+        );
+      }
     },
   },
 });

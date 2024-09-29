@@ -17,6 +17,7 @@ const i18n = createI18n({
     en: {
       recette: {
         recipes: "Recipes",
+        recipeConfirm: "Are you sure you want to delete this recipe?",
         category: "Category",
         recipeManagement: "Recipe Management",
         welcomeText: "Welcome to the Recipe Management System",
@@ -52,7 +53,7 @@ const i18n = createI18n({
       },
 
       recipeListCategory: {
-        title: " Recipes List of  ",
+        title: " Category Recipes:  ",
       },
       editCategory: {
         title: "Edit Category",
@@ -68,6 +69,7 @@ const i18n = createI18n({
     fr: {
       recette: {
         recipes: "Recettes",
+        recipeConfirm: "Vous êtes sur de vouloir supprimer cette recette ?",
         category: "Catégories",
         recipeManagement: "Gestion des recettes",
         recipeCategory: "Catégorie",
@@ -102,7 +104,7 @@ const i18n = createI18n({
       },
 
       recipeListCategory: {
-        title: " Liste de Recettes de ",
+        title: "  Recettes de Catégorie: ",
       },
       editCategory: {
         title: "Modification de Catégorie",

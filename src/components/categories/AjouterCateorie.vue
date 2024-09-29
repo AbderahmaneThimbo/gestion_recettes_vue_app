@@ -23,6 +23,7 @@
 </template>
 
 <script setup>
+import router from "@/router";
 import { useRecetteStore } from "@/stores/recette";
 import { ref } from "vue";
 
@@ -32,7 +33,8 @@ const categorie = ref({ nom: "" });
 
 const addCategory = () => {
   stores.addCategorie({ nom: categorie.value.nom });
-
   categorie.value.nom = "";
+
+  router.push("/categories");
 };
 </script>
