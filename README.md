@@ -40,3 +40,21 @@ npm install
 ```bash
 npm run dev
 ```
+
+## Utilisation d'Axios
+
+L'application de gestion de recettes utilise Axios pour gérer la communication avec le serveur backend. Elle permet de récupérer, ajouter, modifier et supprimer des recettes et des catégories en envoyant des requêtes HTTP.
+
+
+## Gestion de la Traduction (i18n)
+
+Pour la gestion multilingue, l'application intègre i18n pour la traduction, permettant aux utilisateurs de changer de langue en temps réel. Les textes de l'interface s'adaptent automatiquement, offrant une expérience utilisateur localisée, avec des solutions de secours en cas de traduction manquante.
+
+
+## Auteur
+
+[Abderahmane Thimbo](https://github.com/AbderahmaneThimbo)
+
+## Contributeur
+
+[Harouna Traoré](https://github.com/HarounaTraore)
