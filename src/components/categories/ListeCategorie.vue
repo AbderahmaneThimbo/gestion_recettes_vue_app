@@ -39,10 +39,10 @@ const removeCategorie = (id) => {
         </router-link>
       </div>
 
-      <div class="row justify-content-center">
+      <div class="row containt-categorie justify-content-center">
         <div
           v-if="stores.categories.length > 0"
-          class="col-12 col-sm-6 mb-4 col-md-4 col-lg-3"
+          class="col-12 col-sm-6 mb-4 col-md-4 col-lg-3 containt-card"
           v-for="(categorie, index) in stores.categories"
           :key="index"
         >
@@ -96,3 +96,13 @@ const removeCategorie = (id) => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.containt-card {
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.containt-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+</style>
