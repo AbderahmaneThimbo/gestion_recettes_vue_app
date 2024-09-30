@@ -24,25 +24,38 @@
           <td>{{ recette.titre }}</td>
           <td>{{ recette.type }}</td>
           <td class="text-center">
-            <button class="btn btn-info btn-sm me-2" @click="viewRecette(recette)" data-bs-toggle="modal"
-              data-bs-target="#voirRecetteModal">
+            <button
+              class="btn btn-info btn-sm me-2"
+              @click="viewRecette(recette)"
+              data-bs-toggle="modal"
+              data-bs-target="#voirRecetteModal"
+            >
               <i class="fas fa-eye"></i>
             </button>
-
           </td>
         </tr>
       </tbody>
     </table>
 
-    <div class="modal fade" id="voirRecetteModal" tabindex="-1" aria-labelledby="voirRecetteModalTitle"
-      aria-hidden="true">
+    <div
+      class="modal fade"
+      id="voirRecetteModal"
+      tabindex="-1"
+      aria-labelledby="voirRecetteModalTitle"
+      aria-hidden="true"
+    >
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="voirRecetteModalTitle">
               {{ t("recette.recipeDetails") }}
             </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
           <div class="modal-body">
             <p><strong>N°:</strong> {{ store.recette.id }}</p>

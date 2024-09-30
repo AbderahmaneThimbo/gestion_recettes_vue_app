@@ -1,7 +1,9 @@
 <template>
-  <div class="container d-flex justify-content-center align-items-center ">
+  <div class="container d-flex justify-content-center align-items-center">
     <div class="col-12 col-md-6">
-      <h3 class="text-center fw-bold mb-4 mt-4">{{ $t("addCategorie.title") }}</h3>
+      <h3 class="text-center fw-bold mb-4 mt-4">
+        {{ $t("addCategorie.title") }}
+      </h3>
       <div class="">
         <router-link to="/categories" class="btn btn-secondary mb-3">
           <i class="fas fa-arrow-left"></i>
@@ -13,12 +15,19 @@
             {{ $t("addCategorie.name") }}
           </label>
           <div class="input-group">
-            <span class="input-group-text bg-success border-success text-white border-end-0">
+            <span
+              class="input-group-text bg-success border-success text-white border-end-0"
+            >
               <i class="fas fa-list"></i>
             </span>
-            <input v-model="categorie.nom" type="text" id="categoryName" class="form-control" required />
+            <input
+              v-model="categorie.nom"
+              type="text"
+              id="categoryName"
+              class="form-control"
+              required
+            />
           </div>
-
         </div>
         <div class="d-grid">
           <button type="submit" class="btn btn-success">

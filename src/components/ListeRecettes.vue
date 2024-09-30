@@ -1,7 +1,7 @@
 <template>
   <div class="container mt-5">
     <h2 class="text-center mb-2 fw-bold">{{ t("recette.listTitle") }}</h2>
-    
+
     <div class="container mt-4">
       <div class="input-group w-50">
         <span class="input-group-text bg-primary border-primary">
@@ -10,7 +10,7 @@
         <input
           type="text"
           class="form-control border-primary rounded"
-          :placeholder="$t('recette.searchPlaceholder') "
+          :placeholder="$t('recette.searchPlaceholder')"
           v-model="searchQuery"
         />
       </div>
@@ -124,10 +124,9 @@ const searchQuery = ref("");
 const recettes = computed(() => store.recettes);
 const { t } = useI18n();
 
-
 const filteredRecettes = computed(() => {
   return recettes.value.filter((recette) =>
-    recette.titre.toLowerCase().includes(searchQuery.value.toLowerCase())
+    recette.titre.toLowerCase().includes(searchQuery.value.toLowerCase()),
   );
 });
 
@@ -148,5 +147,4 @@ const removeRecette = (id) => {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

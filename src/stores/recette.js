@@ -42,7 +42,7 @@ export const useRecetteStore = defineStore("recette", {
       if (recette) {
         this.recette = recette;
         this.categorie = this.categories.filter(
-          (cat) => cat.id === recette.categorie_id
+          (cat) => cat.id === recette.categorie_id,
         );
         this.recetteId = recette.id;
       } else {
@@ -58,14 +58,14 @@ export const useRecetteStore = defineStore("recette", {
     async removeRecette(index) {
       try {
         const reponse = await axios.delete(
-          `http://127.0.0.1:3000/recettes/${index}`
+          `http://127.0.0.1:3000/recettes/${index}`,
         );
         this.loandRecetteData();
         return reponse;
       } catch (err) {
         console.error(
           "Erreur lors de la suppression de la recette :",
-          err.message
+          err.message,
         );
       }
     },
@@ -82,20 +82,20 @@ export const useRecetteStore = defineStore("recette", {
       try {
         const response = await axios.put(
           `http://127.0.0.1:3000/recettes/${this.recetteId}`,
-          this.recette
+          this.recette,
         );
         console.log(response.data);
         this.loandRecetteData();
       } catch (err) {
         console.error(
           "Erreur lors de la modification de la recette :",
-          err.message
+          err.message,
         );
       }
     },
     recetteByCategorie(id) {
       this.recettesCategorie = this.recettes.filter(
-        (recette) => recette.categorie_id === id
+        (recette) => recette.categorie_id === id,
       );
     },
     nameCategory(id) {
@@ -110,7 +110,7 @@ export const useRecetteStore = defineStore("recette", {
       } catch (err) {
         console.error(
           "Erreur lors du chargement des catégories :",
-          err.message
+          err.message,
         );
         this.categories = [];
       }
@@ -121,14 +121,14 @@ export const useRecetteStore = defineStore("recette", {
     async removeCategorie(index) {
       try {
         const reponse = await axios.delete(
-          `http://127.0.0.1:3000/categories/${index}`
+          `http://127.0.0.1:3000/categories/${index}`,
         );
         this.loandCategorieData();
         return reponse;
       } catch (err) {
         console.error(
           "Erreur lors de la suppression de la catégorie :",
-          err.message
+          err.message,
         );
       }
     },
@@ -136,7 +136,7 @@ export const useRecetteStore = defineStore("recette", {
       try {
         const reponse = await axios.post(
           `http://127.0.0.1:3000/categories`,
-          obj
+          obj,
         );
         this.loandCategorieData();
         return reponse;
@@ -148,14 +148,14 @@ export const useRecetteStore = defineStore("recette", {
       try {
         await axios.put(
           `http://127.0.0.1:3000/categories/${index}`,
-          this.categorie
+          this.categorie,
         );
         this.loandCategorieData();
         this.route.push("/categories");
       } catch (err) {
         console.error(
           "Erreur lors de la modification de la catégorie :",
-          err.message
+          err.message,
         );
       }
     },

@@ -1,6 +1,6 @@
 <template>
   <div v-if="recette">
-    <h3 class="text-center fw-bold mt-4 mb-4 ">{{ $t("recette.addRecipe") }}</h3>
+    <h3 class="text-center fw-bold mt-4 mb-4">{{ $t("recette.addRecipe") }}</h3>
     <div class="row">
       <div class="">
         <router-link to="/Liste" class="btn btn-secondary mb-3">
@@ -17,10 +17,15 @@
               <span class="input-group-text bg-success text-white border-end-0">
                 <i class="fas fa-utensils"></i>
               </span>
-              <input type="text" id="titre" v-model="recette.titre" class="form-control border-success"
-                :placeholder="$t('recette.recipeTitlePlaceholder')" required />
+              <input
+                type="text"
+                id="titre"
+                v-model="recette.titre"
+                class="form-control border-success"
+                :placeholder="$t('recette.recipeTitlePlaceholder')"
+                required
+              />
             </div>
-
           </div>
           <div class="mb-3 position-relative">
             <label for="ingredient" class="form-label">{{
@@ -30,10 +35,14 @@
               <span class="input-group-text bg-success text-white border-end-0">
                 <i class="fas fa-apple-alt"></i>
               </span>
-              <textarea id="ingredient" v-model="recette.ingredients" class="form-control border-success"
-                :placeholder="$t('recette.recipeIngredientsPlaceholder')" required></textarea>
+              <textarea
+                id="ingredient"
+                v-model="recette.ingredients"
+                class="form-control border-success"
+                :placeholder="$t('recette.recipeIngredientsPlaceholder')"
+                required
+              ></textarea>
             </div>
-
           </div>
           <div class="mb-3 position-relative">
             <label for="type" class="form-label">{{
@@ -43,30 +52,46 @@
               <span class="input-group-text bg-success text-white border-end-0">
                 <i class="fas fa-drumstick-bite"></i>
               </span>
-              <select id="type" v-model="recette.type" class="form-control border-success" required>
+              <select
+                id="type"
+                v-model="recette.type"
+                class="form-control border-success"
+                required
+              >
                 <option value="Entrée">{{ $t("recette.starter") }}</option>
                 <option value="Plat">{{ $t("recette.mainCourse") }}</option>
                 <option value="Dessert">{{ $t("recette.dessert") }}</option>
               </select>
             </div>
-
           </div>
           <div class="mb-3 position-relative">
             <label for="categorie" class="form-label">{{
               $t("recette.selectCategory")
             }}</label>
             <div class="input-group">
-              <span class="input-group-text bg-success border-success text-white border-end-0">
+              <span
+                class="input-group-text bg-success border-success text-white border-end-0"
+              >
                 <i class="fas fa-list"></i>
               </span>
-              <select id="categorie" v-model="recette.categorie_id" class="form-control border-success" required>
-                <option value="" disabled>{{ $t("recette.selectCategory") }}</option>
-                <option v-for="(categorie, index) in store.categories" :key="index" :value="categorie.id">
+              <select
+                id="categorie"
+                v-model="recette.categorie_id"
+                class="form-control border-success"
+                required
+              >
+                <option value="" disabled>
+                  {{ $t("recette.selectCategory") }}
+                </option>
+                <option
+                  v-for="(categorie, index) in store.categories"
+                  :key="index"
+                  :value="categorie.id"
+                >
                   {{ categorie.nom }}
                 </option>
               </select>
             </div>
-
           </div>
           <button type="submit" class="btn btn-success w-25">
             {{ $t("addCategorie.submit") }}
@@ -74,24 +99,40 @@
         </form>
       </div>
 
-      <div class="col-md-6 d-flex justify-content-center align-items-center d-none d-md-block">
-        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+      <div
+        class="col-md-6 d-flex justify-content-center align-items-center d-none d-md-block"
+      >
+        <div
+          id="carouselExampleSlidesOnly"
+          class="carousel slide"
+          data-bs-ride="carousel"
+        >
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="../assets/img1.jpg" class="d-block w-100" alt="Image 1">
+              <img
+                src="../assets/img1.jpg"
+                class="d-block w-100"
+                alt="Image 1"
+              />
             </div>
             <div class="carousel-item">
-              <img src="../assets/img2.jpg" class="d-block w-100" alt="Image 2">
+              <img
+                src="../assets/img2.jpg"
+                class="d-block w-100"
+                alt="Image 2"
+              />
             </div>
             <div class="carousel-item">
-              <img src="../assets/img3.jpg" class="d-block w-100" alt="Image 3">
+              <img
+                src="../assets/img3.jpg"
+                class="d-block w-100"
+                alt="Image 3"
+              />
             </div>
           </div>
         </div>
       </div>
-
     </div>
-
   </div>
 </template>
 
@@ -124,12 +165,10 @@ const ajoutRecette = () => {
   border-radius: 0.25rem 0 0 0.25rem;
 }
 
-
 .form-control,
 .form-select {
   border-radius: 0 0.25rem 0.25rem 0;
 }
-
 
 .border-start-0 {
   border-left: none !important;

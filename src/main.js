@@ -10,17 +10,15 @@ import App from "./App.vue";
 import router from "./router";
 import axios from "axios";
 
-
-import en from './locales/en.json';
-import fr from './locales/fr.json';
-
+import en from "./locales/en.json";
+import fr from "./locales/fr.json";
 
 const i18n = createI18n({
-  locale: "fr", 
-  fallbackLocale: "en", 
+  locale: "fr",
+  fallbackLocale: "en",
   messages: {
-    en, 
-    fr, 
+    en,
+    fr,
   },
 });
 

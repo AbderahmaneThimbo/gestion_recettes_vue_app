@@ -1,11 +1,10 @@
 <script setup>
-import { useI18n } from 'vue-i18n';
+import { useI18n } from "vue-i18n";
 
 const { locale } = useI18n();
 
-
 const changeLanguage = (event) => {
-  locale.value = event.target.value; 
+  locale.value = event.target.value;
 };
 </script>
 
@@ -32,10 +31,16 @@ const changeLanguage = (event) => {
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item me-3">
-              <RouterLink class="nav-link fw-bold" to="/Liste">{{ $t('recette.recipes') }}</RouterLink>
+              <RouterLink class="nav-link fw-bold" to="/Liste">{{
+                $t("recette.recipes")
+              }}</RouterLink>
             </li>
             <li class="nav-item me-3">
-              <RouterLink class="nav-link fw-bold" :to="{name: 'categories'}">{{ $t('recette.category') }}</RouterLink>
+              <RouterLink
+                class="nav-link fw-bold"
+                :to="{ name: 'categories' }"
+                >{{ $t("recette.category") }}</RouterLink
+              >
             </li>
             <li class="nav-item">
               <select class="form-select" @change="changeLanguage">
@@ -46,7 +51,6 @@ const changeLanguage = (event) => {
           </ul>
         </div>
       </div>
-      
     </nav>
   </header>
 
@@ -61,11 +65,11 @@ img {
 }
 
 .form-select {
-  width: 68px; 
+  width: 68px;
 }
 
 .navbar-nav .form-select {
-  margin-left: auto; 
+  margin-left: auto;
 }
 
 .navbar-nav .nav-item {
