@@ -2,26 +2,19 @@
   <div class="container mt-5">
     <h2 class="text-center mb-2 fw-bold">{{ t("recette.listTitle") }}</h2>
 
-    <div class="container mt-4">
-      <div class="input-group w-50">
-        <span class="input-group-text bg-primary border-primary">
-          <i class="fas fa-search"></i>
-        </span>
-        <input
-          type="text"
-          class="form-control border-primary rounded"
-          :placeholder="$t('recette.searchPlaceholder')"
-          v-model="searchQuery"
-        />
-      </div>
-    </div>
 
-    <div class="container d-flex justify-content-end">
-      <RouterLink
-        class="btn btn-primary mt-3 mb-3"
-        to="/ajouter"
-        @click="store.iniatilise"
-      >
+    <div class="container mb-3 d-flex justify-content-between">
+
+      <div class=" w-75 mt-4">
+        <div class="input-group w-50">
+          <span class="input-group-text bg-primary border-primary">
+            <i class="fas fa-search"></i>
+          </span>
+          <input type="text w-50" class="form-control border-primary rounded"
+            :placeholder="$t('recette.searchPlaceholder')" v-model="searchQuery" />
+        </div>
+      </div>
+      <RouterLink class="btn btn-primary mt-3 mb-3" to="/ajouter" @click="store.iniatilise">
         {{ t("recette.addRecipe") }}
       </RouterLink>
     </div>
@@ -41,25 +34,14 @@
           <td>{{ recette.titre }}</td>
           <td>{{ recette.type }}</td>
           <td class="text-center">
-            <button
-              class="btn btn-info btn-sm me-2"
-              @click="viewRecette(recette)"
-              data-bs-toggle="modal"
-              data-bs-target="#voirRecetteModal"
-            >
+            <button class="btn btn-info btn-sm me-2" @click="viewRecette(recette)" data-bs-toggle="modal"
+              data-bs-target="#voirRecetteModal">
               <i class="fas fa-eye"></i>
             </button>
-            <RouterLink
-              to="/modifier"
-              class="btn btn-warning btn-sm me-2"
-              @click="store.getRecette(recette)"
-            >
+            <RouterLink to="/modifier" class="btn btn-warning btn-sm me-2" @click="store.getRecette(recette)">
               <i class="fas fa-edit"></i>
             </RouterLink>
-            <button
-              class="btn btn-danger btn-sm"
-              @click="removeRecette(recette.id)"
-            >
+            <button class="btn btn-danger btn-sm" @click="removeRecette(recette.id)">
               <i class="fas fa-trash"></i>
             </button>
           </td>
@@ -67,25 +49,15 @@
       </tbody>
     </table>
 
-    <div
-      class="modal fade"
-      id="voirRecetteModal"
-      tabindex="-1"
-      aria-labelledby="voirRecetteModalTitle"
-      aria-hidden="true"
-    >
+    <div class="modal fade" id="voirRecetteModal" tabindex="-1" aria-labelledby="voirRecetteModalTitle"
+      aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="voirRecetteModalTitle">
               {{ t("recette.recipeDetails") }}
             </h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <p><strong>N°:</strong> {{ store.recette.id }}</p>

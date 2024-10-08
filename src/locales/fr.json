@@ -21,8 +21,10 @@
     "delete": "Supprimer",
     "viewDetails": "Voir les Détails",
     "recipeTitle": "Titre",
+    "titleError": "Le titre doit contenir entre 5 et 100 caractères.",
     "recipeType": "Type",
     "ingredients": "Ingrédients",
+    "ingredientsError": "Les ingrédients doivent contenir entre 10 et 500 caractères.",
     "addNewRecipe": "Ajouter une nouvelle Recette",
     "save": "Enregistrer",
     "recipeDetails": "Détails de la Recette"

@@ -9,125 +9,89 @@
       </div>
       <div class="col-md-6">
         <form @submit.prevent="ajoutRecette">
+
           <div class="mb-3 position-relative">
             <label for="titre" class="form-label">{{
               $t("recette.recipeTitle")
-            }}</label>
+              }}</label>
             <div class="input-group">
               <span class="input-group-text bg-success text-white border-end-0">
                 <i class="fas fa-utensils"></i>
               </span>
-              <input
-                type="text"
-                id="titre"
-                v-model="recette.titre"
-                class="form-control border-success"
-                :placeholder="$t('recette.recipeTitlePlaceholder')"
-                required
-              />
+              <input type="text" id="titre" v-model="recette.titre" class="form-control border-success"
+                :placeholder="$t('recette.recipeTitlePlaceholder')" required />
             </div>
+            <!-- Message d'erreur pour le titre -->
+            <small v-if="errors.titre" class="text-danger">{{ errors.titre }}</small>
           </div>
+
           <div class="mb-3 position-relative">
             <label for="ingredient" class="form-label">{{
               $t("recette.ingredients")
-            }}</label>
+              }}</label>
             <div class="input-group">
               <span class="input-group-text bg-success text-white border-end-0">
                 <i class="fas fa-apple-alt"></i>
               </span>
-              <textarea
-                id="ingredient"
-                v-model="recette.ingredients"
-                class="form-control border-success"
-                :placeholder="$t('recette.recipeIngredientsPlaceholder')"
-                required
-              ></textarea>
+              <textarea id="ingredient" v-model="recette.ingredients" class="form-control border-success"
+                :placeholder="$t('recette.recipeIngredientsPlaceholder')" required></textarea>
             </div>
+            <!-- Message d'erreur pour les ingrédients -->
+            <small v-if="errors.ingredients" class="text-danger">{{ errors.ingredients }}</small>
           </div>
+
           <div class="mb-3 position-relative">
             <label for="type" class="form-label">{{
               $t("recette.recipeType")
-            }}</label>
+              }}</label>
             <div class="input-group">
               <span class="input-group-text bg-success text-white border-end-0">
                 <i class="fas fa-drumstick-bite"></i>
               </span>
-              <select
-                id="type"
-                v-model="recette.type"
-                class="form-control border-success"
-                required
-              >
+              <select id="type" v-model="recette.type" class="form-control border-success" required>
                 <option value="Entrée">{{ $t("recette.starter") }}</option>
                 <option value="Plat">{{ $t("recette.mainCourse") }}</option>
                 <option value="Dessert">{{ $t("recette.dessert") }}</option>
               </select>
             </div>
           </div>
+
           <div class="mb-3 position-relative">
             <label for="categorie" class="form-label">{{
               $t("recette.selectCategory")
-            }}</label>
+              }}</label>
             <div class="input-group">
-              <span
-                class="input-group-text bg-success border-success text-white border-end-0"
-              >
+              <span class="input-group-text bg-success border-success text-white border-end-0">
                 <i class="fas fa-list"></i>
               </span>
-              <select
-                id="categorie"
-                v-model="recette.categorie_id"
-                class="form-control border-success"
-                required
-              >
+              <select id="categorie" v-model="recette.categorie_id" class="form-control border-success" required>
                 <option value="" disabled>
                   {{ $t("recette.selectCategory") }}
                 </option>
-                <option
-                  v-for="(categorie, index) in store.categories"
-                  :key="index"
-                  :value="categorie.id"
-                >
+                <option v-for="(categorie, index) in store.categories" :key="index" :value="categorie.id">
                   {{ categorie.nom }}
                 </option>
               </select>
             </div>
           </div>
+
           <button type="submit" class="btn btn-success w-25">
             {{ $t("addCategorie.submit") }}
           </button>
         </form>
       </div>
 
-      <div
-        class="col-md-6 d-flex justify-content-center align-items-center d-none d-md-block"
-      >
-        <div
-          id="carouselExampleSlidesOnly"
-          class="carousel slide"
-          data-bs-ride="carousel"
-        >
+      <div class="col-md-6 d-flex justify-content-center align-items-center d-none d-md-block">
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img
-                src="../assets/img1.jpg"
-                class="d-block w-100"
-                alt="Image 1"
-              />
+              <img src="../assets/img1.jpg" class="d-block w-100" alt="Image 1" />
             </div>
             <div class="carousel-item">
-              <img
-                src="../assets/img2.jpg"
-                class="d-block w-100"
-                alt="Image 2"
-              />
+              <img src="../assets/img2.jpg" class="d-block w-100" alt="Image 2" />
             </div>
             <div class="carousel-item">
-              <img
-                src="../assets/img3.jpg"
-                class="d-block w-100"
-                alt="Image 3"
-              />
+              <img src="../assets/img3.jpg" class="d-block w-100" alt="Image 3" />
             </div>
           </div>
         </div>
@@ -137,27 +101,61 @@
 </template>
 
 <script setup>
+import { reactive } from "vue";
 import { useRecetteStore } from "@/stores/recette";
 import { onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
+
 const route = useRouter();
 const { t } = useI18n();
 const store = useRecetteStore();
 const recette = store.recette;
+
+// Erreurs réactives pour les messages d'erreur
+const errors = reactive({
+  titre: null,
+  ingredients: null,
+});
+
+// Fonction de validation
+const validateForm = () => {
+  let isValid = true;
+
+  if (recette.titre.length < 5 || recette.titre.length > 100) {
+    errors.titre = t("recette.titleError");
+    isValid = false;
+  } else {
+    errors.titre = null;
+  }
+
+  if (recette.ingredients.length < 10 || recette.ingredients.length > 500) {
+    errors.ingredients = t("recette.ingredientsError");
+    isValid = false;
+  } else {
+    errors.ingredients = null;
+  }
+
+  return isValid;
+};
+
+
+const ajoutRecette = () => {
+  if (validateForm()) {
+    store.addRecette({
+      titre: recette.titre,
+      type: recette.type,
+      ingredients: recette.ingredients,
+      categorie_id: parseInt(recette.categorie_id),
+    });
+    route.push("/Liste");
+  }
+};
+
 onMounted(() => {
   store.loandCategorieData();
   store.loandRecetteData();
 });
-const ajoutRecette = () => {
-  store.addRecette({
-    titre: recette.titre,
-    type: recette.type,
-    ingredients: recette.ingredients,
-    categorie_id: parseInt(recette.categorie_id),
-  });
-  route.push("/Liste");
-};
 </script>
 
 <style>
@@ -172,5 +170,9 @@ const ajoutRecette = () => {
 
 .border-start-0 {
   border-left: none !important;
+}
+
+.text-danger {
+  font-size: 0.875rem;
 }
 </style>

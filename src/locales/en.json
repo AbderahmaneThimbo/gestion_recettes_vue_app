@@ -21,6 +21,8 @@
     "delete": "Delete",
     "viewDetails": "View Details",
     "recipeTitle": "Title",
+    "titleError": "The title must be between 5 and 100 characters.",
+    "ingredientsError": "The ingredients must be between 10 and 500 characters.",
     "recipeType": "Type",
     "ingredients": "Ingredients",
     "addNewRecipe": "Add a New Recipe",
