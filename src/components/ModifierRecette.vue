@@ -14,7 +14,7 @@
           <div class="mb-3 position-relative">
             <label for="titre" class="form-label">{{
               $t("recette.recipeTitle")
-              }}</label>
+            }}</label>
             <div class="input-group">
               <span class="input-group-text bg-success text-white border-end-0">
                 <i class="fas fa-utensils"></i>
@@ -28,7 +28,7 @@
           <div class="mb-3 position-relative">
             <label for="ingredient" class="form-label">{{
               $t("recette.ingredients")
-              }}</label>
+            }}</label>
             <div class="input-group">
               <span class="input-group-text bg-success text-white border-end-0">
                 <i class="fas fa-apple-alt"></i>
@@ -42,7 +42,7 @@
           <div class="mb-3 position-relative">
             <label for="type" class="form-label">{{
               $t("recette.recipeType")
-              }}</label>
+            }}</label>
             <div class="input-group">
               <span class="input-group-text bg-success text-white border-end-0">
                 <i class="fas fa-drumstick-bite"></i>
@@ -57,7 +57,7 @@
           <div class="mb-3 position-relative">
             <label for="categorie" class="form-label">{{
               $t("recette.selectCategory")
-              }}</label>
+            }}</label>
             <div class="input-group">
               <span class="input-group-text bg-success text-white border-end-0">
                 <i class="fas fa-drumstick-bite"></i>
@@ -136,6 +136,14 @@ const validateForm = () => {
 
 const modifierRecette = () => {
   if (validateForm()) {
+    const recetteExistante = store.recettes.find(
+      (r) => r.titre.toLowerCase() === recette.titre.toLowerCase()
+    );
+
+    if (recetteExistante) {
+      errors.titre = t("recette.recipeExistsError");
+      return;
+    }
     store.editRecette();
     router.push("/Liste");
   }

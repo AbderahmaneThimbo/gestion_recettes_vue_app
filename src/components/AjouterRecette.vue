@@ -142,6 +142,14 @@ const validateForm = () => {
 
 const ajoutRecette = () => {
   if (validateForm()) {
+    const recetteExistante = store.recettes.find(
+      (r) => r.titre.toLowerCase() === recette.titre.toLowerCase()
+    );
+
+    if (recetteExistante) {
+      errors.titre = t("recette.recipeExistsError");
+      return;
+    }
     store.addRecette({
       titre: recette.titre,
       type: recette.type,

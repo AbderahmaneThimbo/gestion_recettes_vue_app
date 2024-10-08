@@ -22,6 +22,7 @@
     "viewDetails": "View Details",
     "recipeTitle": "Title",
     "titleError": "The title must be between 5 and 100 characters.",
+    "recipeExistsError": "A recipe with this title already exists.",
     "ingredientsError": "The ingredients must be between 10 and 500 characters.",
     "recipeType": "Type",
     "ingredients": "Ingredients",
